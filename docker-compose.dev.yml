@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: homelab_blog
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - .:/var/www/html

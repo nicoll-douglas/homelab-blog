@@ -1,0 +1,95 @@
+/* Setup */
+
+:root {
+  --G-color-accent-1-light: #bffb4f;
+  --G-color-accent-1-dark: #6fdd00;
+  --G-color-neutral: #3d56a0;
+  --G-color-primary: white;
+  --G-color-highlight: #ffbdff;
+}
+
+* {
+  font-family: Source Code Pro, monospace, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  color: var(--G-color-primary);
+  box-sizing: border-box;
+}
+
+/* Selectors */
+
+::selection {
+  background-color: var(--G-color-highlight);
+  color: black;
+}
+
+a,
+a *,
+code {
+  color: var(--G-color-accent-1-light);
+}
+
+img,
+code {
+  border: 1px solid var(--G-color-accent-1-light);
+}
+
+p code,
+ul code {
+  display: inline;
+  padding: 0;
+  white-space: normal;
+}
+
+body {
+  background-color: var(--G-color-neutral);
+  overflow-y: scroll !important;
+  margin: 0;
+}
+
+code {
+  word-break: break-all;
+  text-wrap: wrap;
+  white-space: pre-wrap;
+  display: block;
+  padding: 1rem;
+}
+
+hr {
+  border-bottom: 1px solid var(--G-color-primary);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+img {
+  vertical-align: middle;
+  display: block;
+}
+
+main {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1rem;
+  min-height: 100dvh;
+}
+
+:focus-visible {
+  outline-color: var(--G-color-highlight);
+  outline-width: 1px;
+  outline-style: solid;
+}
+
+a:visited,
+a:visited * {
+  color: var(--G-color-highlight);
+}
+
+a:active,
+a:active * {
+  color: var(--G-color-accent-1-dark);
+}
+
+#hot-links,
+img {
+  margin: 1rem 0;
+}
