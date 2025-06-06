@@ -24,13 +24,21 @@
 
 a,
 a *,
-code {
+code,
+blockquote {
   color: var(--G-color-accent-1-light);
 }
 
 img,
-code {
+code,
+blockquote {
   border: 1px solid var(--G-color-accent-1-light);
+}
+
+code,
+blockquote,
+main {
+  padding: 1rem;
 }
 
 p code,
@@ -38,6 +46,10 @@ ul code {
   display: inline;
   padding: 0;
   white-space: normal;
+}
+
+blockquote {
+  font-style: italic;
 }
 
 body {
@@ -51,7 +63,6 @@ code {
   text-wrap: wrap;
   white-space: pre-wrap;
   display: block;
-  padding: 1rem;
 }
 
 hr {
@@ -69,7 +80,6 @@ img {
 main {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 1rem;
   min-height: 100dvh;
 }
 

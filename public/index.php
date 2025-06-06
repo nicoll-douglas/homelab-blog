@@ -3,15 +3,13 @@ $isBlog = false;
 $title = "Homelab Blog";
 require __DIR__ . "/../src/partials/head.php";
 ?>
-<h1>Homelab Blog</h1>
-<p>Welcome to my homelab blog.</p>
+<h1>Nicoll's Homelab Blog</h1>
+<p>Welcome to my homelab blog. The place where you can accompany my homelabbing process and quest for DevOps mastery.</p>
 <section>
   <h2>Background</h2>
   <p>If you don't know what a homelab is, allow me to provide you with a definition ripped from the internet:</p>
   <blockquote>
-    <em>
-      "A homelab is a personal setup of servers, networking equipment, and other IT infrastructure that allows individuals to experiment, learn, and test technologies at home. It provides a hands-on environment for improving IT skills without affecting real production systems."
-    </em>
+    "A homelab is a personal setup of servers, networking equipment, and other IT infrastructure that allows individuals to experiment, learn, and test technologies at home. It provides a hands-on environment for improving IT skills without affecting real production systems."
   </blockquote>
   <p>
     I started work on my own personal homelab in May 2025. The idea of starting one had been sitting in the back of my mind for a while. I had an old laptop that I knew I could use as a starting point and eventually, I decided to dig up that old laptop and put it to use. My homelab as of now, consists of that laptop as well as my regular PC/workstation.
@@ -40,7 +38,7 @@ require __DIR__ . "/../src/partials/head.php";
   <p>- Nicoll Douglas</p>
 </section>
 <section>
-  <h2>Blog Index</h2>
+  <h2>Blogs</h2>
   <?php require __DIR__ . "/../src/partials/blogIndex.php"; ?>
 </section>
 <?php

@@ -6,6 +6,7 @@ require_once __DIR__ . "/../src/utils/createSlug.php";
 $prompt = fn() => readline("Enter a title for the blog: ");
 $title = $prompt();
 while (empty($title)) {
+  echo "Title cannot be empty.";
   $title = $prompt();
 }
 
@@ -35,7 +36,7 @@ $template = <<<PHP
 require __DIR__ . "/../../../src/partials/head.php";
 ?>
 
-// content
+<!-- content -->
 
 <?php
 require __DIR__ . "/../../../src/partials/tail.php";
