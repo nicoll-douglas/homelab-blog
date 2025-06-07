@@ -37,7 +37,6 @@ require __DIR__ . "/../src/partials/head.php";
   <p>Check out my <a href="https://github.com/nicoll-douglas">GitHub</a> for more cool projects.</p>
   <p>- Nicoll Douglas</p>
 </section>
-<p>Gitea push mirror test</p>
 <section>
   <h2>Blogs</h2>
   <?php require __DIR__ . "/../src/partials/blogIndex.php"; ?>
