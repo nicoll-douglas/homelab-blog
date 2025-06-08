@@ -8,7 +8,7 @@ on:
 jobs:
   build-and-push:
     name: Build & Push Image
-    runs-on: default
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
@@ -30,7 +30,7 @@ jobs:
   deploy:
     name: Deploy to Production
     needs: [build-and-push]
-    runs-on: default
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
