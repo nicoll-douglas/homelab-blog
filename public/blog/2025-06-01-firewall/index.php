@@ -16,7 +16,7 @@ require __DIR__ . "/../../../src/partials/head.php";
 
   <p>Now I could enable the firewall with <code>sudo ufw enable</code> with the specified rules applied.</p>
   <p>I now had an active firewall with a rule stack that looked as follows, conveniently shown with <code>sudo ufw status numbered</code>:</p>
-  <IMG src="./ufw-rules.png" height="180" alt="ufw rules">
+  <IMG src="./ufw-rules.png" width="430" alt="ufw rules">
   <p>I also learnt you can use <code>sudo ufw delete</code> to delete a rule by its specified number. But yea, <code>ufw</code> is a much more elegant way to control access rather than manually configuring ports on your machine.</p>
 </section>
 <?php

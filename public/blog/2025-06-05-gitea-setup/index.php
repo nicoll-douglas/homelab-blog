@@ -23,7 +23,7 @@ require __DIR__ . "/../../../src/partials/head.php";
   <p>The next step was to generate an SSH key pair for me to use with Gitea from my main machine. I did that and then added the public key to my Gitea account in the web interface.</p>
   <p>Now it was time to test to see if SSH was working for the git user. I ran <code>ssh -p 222 git@192.168.1.5</code> and got a successful response which was good:</p>
 
-  <img src="./successful-ssh.png" alt="Successful SSH" height="130">
+  <img src="./successful-ssh.png" alt="Successful SSH" width="600">
 </section>
 
 <section>
@@ -38,7 +38,7 @@ require __DIR__ . "/../../../src/partials/head.php";
         echo $code
         ?></code>
   <p>I then tried pushing my commits to test if I could indeed push to the remote in Gitea and it worked for both repos:</p>
-  <img src="./successful-push.png" height="180" alt="Successful push">
+  <img src="./successful-push.png" width="430" alt="Successful push">
 
   <p>The next step was to add a push mirror from Gitea to GitHub. This is a feature of Gitea that allows you to sync up your Gitea repo with a GitHub repo and so that whenever you push to Gitea, it will reflect that in GitHub. This was quite simple to do and just required me to enter the details of the mirror repo, my account, and a GitHub personal access token with read-write access into the Gitea repo settings. I then tried clicking the sync button and my newer commits showed up on GitHub—the push mirroring was now working.</p>
   <p>Now I have Gitea all set up with some locally hosted repos which enables the next few things I want to set up for the homelab.</p>

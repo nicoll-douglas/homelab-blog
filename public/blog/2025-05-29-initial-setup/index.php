@@ -37,13 +37,13 @@ BASH;
 
   <p>I tried <code>ping</code>ing the laptop from my main and I got a successful response. The same also happened when I tried in the reverse direction, so now I could successfully network between my machines.</p>
 
-  <img src="./ping.png" height="200" alt="Successful ping">
+  <img src="./ping.png" width="440" alt="Successful ping">
 </section>
 
 <section>
   <h2>SSH</h2>
   <p>Since I could successfully network between machines I tried SSH'ing into the laptop, and that also worked which was huge:</p>
-  <img src="./ssh.png" height="200" alt="Successful SSH">
+  <img src="./ssh.png" width="675" alt="Successful SSH">
 
   <p>But naturally I want to use public key authentication because it's better than the default password authentication. Setting up and working with SSH keys is something that I've done multiple times but I always forget the ins and outs so I had to use GPT as a guide. But now I have the process documented below so I won't forget.</p>
 

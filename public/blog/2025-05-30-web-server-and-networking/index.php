@@ -7,7 +7,7 @@ require __DIR__ . "/../../../src/partials/head.php";
 
   <p>After installing Nginx with <code>sudo apt install nginx</code>, I could access the default page over both the ethernet and Wi-Fi interface IPs (192.168.10.2 and 192.168.1.20 respectively) which was really cool to see:</p>
 
-  <img src="./nginx-home.png" height="200" alt="Nginx home page">
+  <img src="./nginx-home.png" width="450" alt="Nginx home page">
 
   <p>By default Nginx listens for incoming requests on all network interfaces via port 80, hence why that worked. I also learnt that all IPv4 IPs on a machine are represented by 0.0.0.0 in networking contexts.</p>
 </section>
@@ -37,13 +37,13 @@ BASH;
 
   <p>So since it's using the DHCP protocol, apparently that means that the IP can change over time as I thought. I barely understand what DHCP is (I have to learn networking theory in more detail) but I logged into my router's admin web interface and saw that the pool of IPs that DHCP is currently using is from 192.168.1.10 to 192.168.1.254:</p>
 
-  <img src="./dhcp.png" alt="DHCP pool" height="200">
+  <img src="./dhcp.png" alt="DHCP pool" width="480">
 
   <p>Another interesting thing is that my router's IP address is 192.168.1.1 and so when I'm accessing the web interface which is at http://192.168.1.1 it's the same scenario as accessing the Nginx page.</p>
 
   <p>I could've disabled DHCP, but I don't know what effects that would have since I'm still learning about networks so I left it. I thought of using an IP like 192.168.10.3 since for my ethernet interfaces I was using 192.168.10.*, but apparently that wouldn't work because that IP is on a different subnet. I'm still not sure what subnets and subnet masks are but again, networking theory is on the to-do list. So instead, it was gonna have to be something like 192.168.1.5 so I tried pinging the IP to see if it was in use:</p>
 
-  <img src="./ip-free.png" height="100" alt="Unsuccessful ping">
+  <img src="./ip-free.png" width="500" alt="Unsuccessful ping">
 
   <p><code>Desintation host unreachable</code> so the IP is most likely not in use. I also checked the devices list in the admin interface of the router, and all the connected devices are just devices with IPs in the DHCP pool so it should be fine to use. So I updated the config as follows which now assigns a static IP:</p>
 
@@ -82,7 +82,7 @@ BASH;
 
   <p>This was the output:</p>
 
-  <img src="./ports.png" alt="Open ports" height="100">
+  <img src="./ports.png" alt="Open ports" width="480">
 
   <p>The UDP line is apparently a DHCP client listening for replies which is how IP addresses are assigned automatically with DHCP. I guess this port doesn't need to be open anymore since all interfaces have static IPs now but its fine. 22 is the SSH port and 80 the is HTTP port where I can access the Nginx default page. <code>0.0.0.0</code> and <code>[::]</code> means I'm listening on all network interfaces, which confirms the default Nginx behaviour.</p>
 

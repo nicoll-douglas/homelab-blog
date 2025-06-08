@@ -5,7 +5,7 @@ require __DIR__ . "/../../../src/partials/head.php";
 <section>
   <h2>The Problem</h2>
   <p>So, I encountered an interesting situation recently with <code>ufw</code>. This is what my current <code>ufw</code> ruleset looks like:</p>
-  <img src="./ufw-rules.png" height="300" alt="Current UFW rules">
+  <img src="./ufw-rules.png" width="450" alt="Current UFW rules">
   <p>Since setting Gitea up, I changed and added some rules to restrict access to my machine on port 3000 so that only my main machine (IP 192.168.1.6) could have access to Gitea. I then tried using a different device (my phone) to see if the firewall rules were applying and surprisingly, no they weren't. I was able to access Gitea from my phone even though the 'deny 3000' rule should not allow that in theory. I was a bit puzzled by this because in my mind, the purpose of a firewall is to sit in front of your server and manage port access as you dictate. So the fact that it wasn't behaving as I expected was alarming.</p>
 
   <p>I did some research on exactly how <code>ufw</code> works and learnt that apparently under the hood it manipulates the <code>iptables</code> on your system. I also learnt (with the help of GPT to analyse my iptables) that Docker also manipulates <code>iptables</code> when delegating host ports and port forwarding to containers. This can in turn produce some conflicts in the <code>iptables</code> and unexpected behaviour when it comes to port access as I observed. This incompatibility between Docker and <code>ufw</code> is mentioned in the <a href="https://docs.docker.com/engine/network/packet-filtering-firewalls/#docker-and-ufw">Docker docs</a> and is also a well known issue amongst the community it seems.</p>
@@ -34,7 +34,7 @@ require __DIR__ . "/../../../src/partials/head.php";
 
   <p>These are what my current rules look like:</p>
 
-  <img src="./ufw-rules-new.png" alt="New UFW rules" height="200">
+  <img src="./ufw-rules-new.png" alt="New UFW rules" width="400">
 
   <p>From my main machine only, access is allowed to the Gitea Docker container with HTTP and SSH, and to SSH on the host itself. HTTP access to the website is also allowed from anywhere internally. Everything else is denied. I thoroughly tested that this was actually case in practice, and indeed it was—mission success.</p>
 
