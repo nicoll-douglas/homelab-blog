@@ -57,4 +57,4 @@ jobs:
       - name: Run Deployment
         run: |
           echo "Starting deployment"
-          ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "bash ${{ vars.DEPLOY_SCRIPT_PATH }}"
+          ssh -o StrictHostKeyChecking=no ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "bash ${{ vars.DEPLOY_SCRIPT_PATH }}"
