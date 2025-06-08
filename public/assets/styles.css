@@ -1,11 +1,11 @@
 /* Setup */
 
 :root {
-  --G-color-accent-1-light: #bffb4f;
-  --G-color-accent-1-dark: #6fdd00;
-  --G-color-neutral: #3d56a0;
-  --G-color-primary: white;
-  --G-color-highlight: #ffbdff;
+  --G-color-accent-1-light: #ffe554;
+  --G-color-accent-1-dark: #ffa22f;
+  --G-color-neutral: #313a19;
+  --G-color-primary: #f2f2f2;
+  --G-color-highlight: #dda056;
 }
 
 * {
@@ -25,7 +25,8 @@
 a,
 a *,
 code,
-blockquote {
+blockquote,
+#ascii-art {
   color: var(--G-color-accent-1-light);
 }
 

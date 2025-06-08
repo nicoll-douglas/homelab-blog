@@ -4,7 +4,7 @@ require __DIR__ . "/../../../src/partials/head.php";
 
 <section>
   <h2>Current Goals</h2>
-  <p>So with my homelab so far I have this site running locally on my Debian machine. I also have an easy deployment script to manually push updates as well as <code>ufw</code> setup and ports managed. My current goal is to have the site exposed to the internet. Another of my major goals is to setup local repo hosting with Gitea on my laptop. That also ties into a better automation pipeline that I want to create for the website where whenever I push to the remote repo on my laptop (in Gitea), I want to rebuild and restart the Docker containers. So in order for me to achieve that, the first thing to do would be to set up Gitea at some point.</p>
+  <p>So with my homelab so far I have this site running locally on my Debian machine. I also have an easy deployment script to manually push updates as well as <code>ufw</code> set up and ports managed. My current goal is to have the site exposed to the internet. Another of my major goals is to set up local repo hosting with Gitea on my laptop. That also ties into a better automation pipeline that I want to create for the website where whenever I push to the remote repo on my laptop (in Gitea), it will rebuild and restart the Docker containers. So in order for me to achieve that, the first thing to do would be to set up Gitea at some point.</p>
 </section>
 
 <section>

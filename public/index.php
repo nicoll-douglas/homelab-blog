@@ -1,8 +1,30 @@
 <?php
 $isBlog = false;
-$title = "Homelab Blog";
+$title = "Nicoll's Homelab Blog";
 require __DIR__ . "/../src/partials/head.php";
 ?>
+
+<pre id="ascii-art" aria-hidden="true">
+             ,----------------,              ,---------,
+        ,-----------------------,          ,"        ,"|
+      ,"                      ,"|        ,"        ,"  |
+     +-----------------------+  |      ,"        ,"    |
+     |  .-----------------.  |  |     +---------+      |
+     |  |                 |  |  |     | -==----'|      |
+     |  |  Nicoll's       |  |  |     |         |      |
+     |  |  Homelab        |  |  |/----|`---=    |      |
+     |  |  C:\>_          |  |  |   ,/|==== ooo |      ;
+     |  |                 |  |  |  // |(((( [33]|    ,"
+     |  `-----------------'  |," .;'| |((((     |  ," 
+     +-----------------------+  ;;  | |         |,"
+        /_)______________(_/  //'   | +---------+
+   ___________________________/___  `,
+  /  oooooooooooooooo  .o.  oooo /,   \,"-----------
+ / ==ooooooooooooooo==.o.  ooo= //   ,`\--{)B     ,"
+/_==__==========__==_ooo__ooo=_/'   /___________,"
+`-----------------------------'
+</pre>
+
 <h1>Nicoll's Homelab Blog</h1>
 <p>Welcome to my homelab blog. The place where you can accompany my homelabbing process and quest for DevOps mastery.</p>
 <section>
@@ -32,13 +54,13 @@ require __DIR__ . "/../src/partials/head.php";
     <li>1TB HDD</li>
   </ul>
   <p>
-    At the time of writing, my homelab setup is pretty new. I'm still in the process of setting up my first few services, learning more about networking, and what I can actually do with my setup. Below you can find an index of blogs where I've documented my homelabbing experience thus far.
+    At the time of writing, my homelab setup is pretty new. I'm still in the process of setting up my first few services, learning more about networking, and what I can actually do with my setup. Below you can find an index of posts where I've documented my homelabbing experience thus far.
   </p>
   <p>Check out my <a href="https://github.com/nicoll-douglas">GitHub</a> for more cool projects.</p>
   <p>- Nicoll Douglas</p>
 </section>
 <section>
-  <h2>Blogs</h2>
+  <h2>Posts</h2>
   <?php require __DIR__ . "/../src/partials/blogIndex.php"; ?>
 </section>
 <?php
