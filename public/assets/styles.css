@@ -67,13 +67,6 @@ code {
   display: block;
 }
 
-hr {
-  border-bottom: 1px solid var(--G-color-primary);
-  border-top: none;
-  border-left: none;
-  border-right: none;
-}
-
 img {
   vertical-align: middle;
   display: block;
