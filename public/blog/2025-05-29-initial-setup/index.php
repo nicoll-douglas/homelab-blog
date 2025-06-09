@@ -3,68 +3,78 @@ require __DIR__ . "/../../../src/partials/head.php";
 ?>
 <section>
   <h2>Basic Networking</h2>
-  <p>Day 2, I now have my old laptop freshly set up with Debian on it. So the way my setup is now is I have my main Ubuntu PC and Debian laptop connected to my router/internet through Wi-Fi. I have decided to connect both machines to each other with an ethernet cable for easy access. So the first thing I have to do is configure the ethernet network interfaces on each machine with a static IP so that I can easily identify them and SSH into my laptop from my main machine.</p>
+  <p>Day 2, I now have my old laptop freshly set up with Debian on it. So the way my setup is now is I have my laptop connected to my router via ethernet and my main Ubuntu PC connected via Wi-Fi. In order to be able to network between my machines, the first thing I have to do is configure their respective network interfaces with a static IP so that I can easily identify them and SSH into my laptop from my main machine.</p>
 
-  <p>By default the Debian laptop is using <code>ifupdown</code> for network management. And so I learnt that network configuration takes place specifically in the <code>/etc/network/</code> directory, specifically the <code>/etc/network/interfaces</code> file. To configure the ethernet interface the way I wanted, I had to add the following block to the file:</p>
+  <p>By default the Debian laptop is using <code>ifupdown</code> for network management. And so I learnt that network configuration takes place in the <code>/etc/network/</code> directory, specifically the <code>/etc/network/interfaces</code> file.</p>
+
+  <p>When inspecting the configuration file, I learnt that by default the ethernet interface was using something called the DHCP protocol. What the DHCP protocol does is it obtains a LAN IP address automatically from the router. So my possible options were reserving a static IP on the router level or on the machine level. I logged in to my router's admin panel and saw that the pool of IPs that DHCP was using was from 192.168.1.10 to 192.168.1.254:</p>
+
+  <img src="./dhcp.png" alt="DHCP pool" width="480">
+  <p>I also had a look at the currently used IPs on the network by devices and they were all in the DHCP pool. So that meant that the free IPs were between 192.168.1.2 and 192.168.1.9 (192.168.1.1 being my router). I decided on 192.168.1.5 to be the static IP for my laptop's ethernet interface.</p>
+
+  <p>To configure the ethernet interface the way I wanted, I had to update the ethernet interface block in <code>/etc/network/interfaces</code> as so:</p>
+
   <code><?php
         $code = <<<BASH
 auto enp1s0
     iface enp1s0 inet static
-    address 192.168.10.2
+    address 192.168.1.5
     netmask 255.255.255.0
 BASH;
         echo $code;
         ?></code>
 
-  <p><code>enp1s0</code> being the name ethernet interface.</p>
+  <p>Then I had to restart the interface with <code>sudo ifdown enp1s0 && sudo ifup enp1s0</code> in order for the new config to take effect.</p>
 
-  <p>I can't remember if I had to restart the networking service on the laptop for the new configuration to take effect but next was the static IP on the Ubuntu machine. My Ubuntu machine was/is using Network Manager to manage networks and apparently that's the case because I had at least one file in <code>/etc/netplan</code> prefixed as so: <code>90-NM-*.yaml</code>. And so, I had to use <code>nmcli</code> to configure the ethernet network interface.</p>
-
-  <p>I had to enter the following command in order to configure a static IP for the ethernet interface <code>enp8s0</code>:</p>
+  <p>Next was the static IP on the Ubuntu machine. My Ubuntu machine was/is using Network Manager and so, I had to use <code>nmcli</code> to configure the Wi-Fi network interface with a static IP. I decided to use 192.168.1.6 and so I had to enter the following commands to configure it as such, first deleting the old connection config and adding a new one:</p>
 
   <code><?php
         $code = <<<BASH
-nmcli con modify "Wired connection 1" \
-  ipv4.addresses 192.168.10.1/24 \
-  ipv4.method manual \
-  connection.autoconnect yes \
-  ipv4.gateway "" \
-  ipv4.dns ""
+nmcli connection delete TALKTALKB42F10
+nmcli connection add type wifi ifname wlp6s0 con-name static-wifi ssid "TALKTALKB42F10"
+nmcli connection modify static-wifi \
+  wifi-sec.key-mgmt wpa-psk
+  wifi-sec.psk "12345678"
+  ipv4.addresses 192.168.1.6/24
+  ipv4.gateway 192.168.1.1
+  ipv4.method manual
 BASH;
         echo $code ?></code>
 
-  <p>And then then the following to bring up the network interface: <code>nmcli con up "Wired connection 1"</code>.</p>
+  <p>Then I ran the following to bring up the network interface: <code>nmcli connection up static-wifi</code>.</p>
 
-  <p>I tried <code>ping</code>ing the laptop from my main and I got a successful response. The same also happened when I tried in the reverse direction, so now I could successfully network between my machines.</p>
+  <p>I tried <code>ping</code>ing the laptop's IP from my PC and I got a successful response:</p>
 
   <img src="./ping.png" width="440" alt="Successful ping">
+
+  <p>The same also happened when I tried in the reverse direction, so now I could successfully network between my machines.</p>
 </section>
 
 <section>
   <h2>SSH</h2>
-  <p>Since I could successfully network between machines I tried SSH'ing into the laptop, and that also worked which was huge:</p>
-  <img src="./ssh.png" width="675" alt="Successful SSH">
+  <p>Since I could successfully network between machines I tried SSH'ing into the laptop with password authentication, and that also worked which was huge.</p>
 
   <p>But naturally I want to use public key authentication because it's better than the default password authentication. Setting up and working with SSH keys is something that I've done multiple times but I always forget the ins and outs so I had to use GPT as a guide. But now I have the process documented below so I won't forget.</p>
 
-  <p>Step 1 is generating a key pair with <code>ssh-keygen</code>. I added a passphrase to the private key when prompted so only I can use the key pair which is standard. I named the key <code>debian-box</code> after the target machine.</p>
-  <p>Step 2 is copying the SSH public key to the server with <code>ssh-copy-id</code>. I used <code>ssh-copy-id -i ~/.ssh/debian-box.pub jiggy@192.168.10.2</code> in my case. That prompted me for the user's password which I entered and then it successfully completed.</p>
-  <p>I tried SSH'ing and now it was using key authentication which was a good sign. Key authentication is setup however, every time I SSH I am prompted for the passphrase which is annoying. So I ran <code>ssh-add ~/.ssh/debian-box</code> which adds the passphrase to <code>ssh-agent</code>.</p>
+  <p>Step 1 is generating a key pair with <code>ssh-keygen</code>. I added a passphrase to the private key when prompted so only I can use the key which is standard. I named the key <code>debian-box</code> after the target machine.</p>
+  <p>Step 2 is copying the SSH public key to the server with <code>ssh-copy-id</code>. I used <code>ssh-copy-id -i ~/.ssh/debian-box.pub jiggy@192.168.1.5</code> in my case. That prompted me for the user's password which I entered and then it successfully completed.</p>
+
+  <p>I tried SSH'ing and now it was using key authentication which was a good sign. Key authentication is set up however, every time I SSH I am prompted for the passphrase which is annoying. So I ran <code>ssh-add ~/.ssh/debian-box</code> which adds the passphrase to <code>ssh-agent</code>.</p>
   <p>Some notes on <code>ssh-agent</code> since I learnt about this for the first time:</p>
   <ul>
     <li>
       <code>ssh-agent</code> is a key manager for <code>ssh</code>
     </li>
-    <li>It holds your keys and certificates in memory, unencrypted, and ready for use by <code>ssh</code></li>
-    <li>It runs in the background and usually starts up the first time you run <code>ssh</code> after reboot</li>
-    <li>If it's not running use: <code>eval "$(ssh-agent -s)"</code></li>
-    <li>The stuff stored in <code>ssh-agent</code> is ephemeral so it gets reset every session</li>
+    <li>It holds your keys and certificates in memory, unencrypted, and ready for use by <code>ssh</code>.</li>
+    <li>It runs in the background and usually starts up the first time you run <code>ssh</code> after reboot.</li>
+    <li>If it's not running use: <code>eval "$(ssh-agent -s)"</code>.</li>
+    <li>The stuff stored in <code>ssh-agent</code> is ephemeral so it gets reset every session.</li>
   </ul>
   <p>I also added the following block to <code>~/.ssh/config</code> to make SSH'ing easier:</p>
   <code><?php
         $code = <<<BASH
 Host debian-box
-  HostName 192.168.10.2
+  HostName 192.168.1.5
   User jiggy
   IdentityFile ~/.ssh/debian-box
 BASH;
@@ -76,8 +86,8 @@ BASH;
 
   <ul>
     <li><code>authorized_keys</code>, <code>known_hosts</code>, and private key files should be 600.</li>
-    <li>Public key files should be 644</li>
-    <li>The <code>.ssh</code> directory should be 700</li>
+    <li>Public key files should be 644.</li>
+    <li>The <code>.ssh</code> directory should be 700.</li>
   </ul>
 
   <p>So after all that was sorted, I tried <code>ssh debian-box</code> again and it worked with my passphrase / private key added to <code>ssh-agent</code>. Now I have easy SSH access to my Debian laptop which was the original goal.</p>

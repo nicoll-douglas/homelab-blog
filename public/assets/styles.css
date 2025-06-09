@@ -107,6 +107,11 @@ img {
   margin: 1rem 0;
 }
 
+.image-link {
+  width: fit-content;
+  display: block;
+}
+
 @media screen and (max-width: 640px) {
   #ascii-art {
     font-size: 2.5vw;

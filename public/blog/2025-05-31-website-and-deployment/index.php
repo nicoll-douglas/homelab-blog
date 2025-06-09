@@ -31,7 +31,7 @@ require __DIR__ . "/../../../src/partials/head.php";
   <p>The first and easy step was installing Docker on the server and that went fine. Then I had to create a new user in order for my deployment script to SSH with. I ran <code>sudo adduser ci</code> and added them to the <code>docker</code> group with <code>sudo usermod -aG docker ci</code> so they could run Docker commands without sudo. I tested that this was now the case by switching to the user with <code>su - ci</code> and running <code>docker run hello-world</code> which went fine.</p>
 
   <p>Next I had to generate some SSH keys on my main machine that would be the SSH client. Out of curiosity, I ended up looking into the differences between RSA keys and ED25519 keys. Essentially, I learnt that RSA keys are slower and ED25519 keys are faster and more modern so they are preferred. I ran <code>ssh-keygen -t ed25519 -C "debian-box ci user (continuous integration)"</code> and didn't include a passphrase since I would be SSH'ing with an automated script. I aptly named the key "debian-box-ci".</p>
-  <p>I then tried to copy the SSH public key to the server with <code>ssh-copy-id -i ~/.ssh/debian-box-ci.pub ci@192.168.10.2</code> but that didn't work now since I disabled password authentication.</p>
+  <p>I then tried to copy the SSH public key to the server with <code>ssh-copy-id -i ~/.ssh/debian-box-ci.pub ci@192.168.1.5</code> but that didn't work now since I disabled password authentication.</p>
 
   <p>I had to manually switch to the ci user, create the .ssh directory, give 700 permissions to it, create the authorized_keys file, add the contents of the public key to it and give 600 permissions to it. A more manual process, but it made me learn about what goes into the process of <code>ssh-copy-id</code>. Now I tested to see if I could SSH with <code>ssh -i ~/.ssh/debian-box-ci</code> and it worked.</p>
 
@@ -69,7 +69,7 @@ require __DIR__ . "/../../../src/partials/head.php";
   <p>
     I made a new site configuration with <code>sudo nano /etc/nginx/sites-available/homelab-blog</code> and added the following:
   </p>
-  <code class="block"><?php $code = <<<BASH
+  <code><?php $code = <<<BASH
 server {
     listen 80;
     server_name _;
@@ -84,13 +84,11 @@ server {
     }
 }
 BASH;
-                      echo $code ?></code>
+        echo $code ?></code>
 
-  <p>This apparently will proxy incoming requests on port 80 of my host machine to my container running internally at 127.0.0.1:8080 as well as necessary headers. Then I enabled the site by creating a symlink with: <code>sudo ln -s /etc/nginx/sites-available/homelab-blog /etc/nginx/sites-enabled/homelab-blog</code>. I ran <code>sudo nginx -t</code> to test the file for syntax errors and all was good. After disabling the default site and reloading Nginx with <code>sudo systemctl reload nginx</code>, the site was now accessible on my local network at http://192.168.10.2 (ethernet from my main machine) and http://192.168.1.5 (Wi-Fi).</p>
+  <p>This apparently will proxy incoming requests on port 80 of my host machine to my container running internally at 127.0.0.1:8080 as well as necessary headers. Then I enabled the site by creating a symlink with: <code>sudo ln -s /etc/nginx/sites-available/homelab-blog /etc/nginx/sites-enabled/homelab-blog</code>. I ran <code>sudo nginx -t</code> to test the file for syntax errors and all was good. After disabling the default site and reloading Nginx with <code>sudo systemctl reload nginx</code>, the site was now accessible on my local network at the machine's IP.</p>
 
-  <p>I also learnt that when accessing the site over Wi-Fi, communications are routed through my Wi-Fi router on my local network. So the request goes from the client to the router to the server.</p>
-
-  <p>So now I had my site accessible on my local network as well as a deployment script. Mission accomplished.</p>
+  <p>So now I had my site accessible on my local network as well as a deployment script—mission accomplished.</p>
 
   <p>Also, some post-deployment considerations I had was that I may want to set up a pipeline for the site to auto-deploy when I push to Git. I'm thinking of running a local Git server on my Debian machine so that I can self-host the repository and then create the deployment pipeline.</p>
 </section>
