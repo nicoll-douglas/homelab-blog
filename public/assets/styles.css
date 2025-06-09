@@ -25,6 +25,7 @@
 a,
 a *,
 code,
+code *,
 blockquote,
 #ascii-art {
   color: var(--G-color-accent-1-light);
@@ -110,6 +111,10 @@ img {
 .image-link {
   width: fit-content;
   display: block;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 @media screen and (max-width: 640px) {

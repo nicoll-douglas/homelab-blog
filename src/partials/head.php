@@ -15,7 +15,6 @@ if ($isBlog) {
   ] = parseSlug($currentBlogSlug);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

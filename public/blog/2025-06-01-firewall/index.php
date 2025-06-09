@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . "/../../../src/partials/head.php";
+require_once __DIR__ . "/../../../src/bootstrap.php";
+require alias("@head");
 ?>
 <section>
   <p>Not much work done today on the homelab and setting up the website however one of the things that I had been wanting to do is set up a firewall. So I decided to install Uncomplicated Firewall with <code>sudo apt install ufw</code>.</p>
@@ -13,16 +14,25 @@ require __DIR__ . "/../../../src/partials/head.php";
   <p>The next step would be to only allow SSH access from my main machine. This was achieved with <code>sudo ufw allow from 192.168.1.6 to any port 22 proto tcp</code> which would only allow SSH access on port 22 from my PC.</p>
 
   <p>Now I could enable the firewall with <code>sudo ufw enable</code> with the specified rules applied.</p>
+
   <p>I now had an active firewall with a rule stack that looked as follows, conveniently shown with <code>sudo ufw status numbered</code>:</p>
-  <code><?php $code = <<<BASH
+
+  <?php
+  $shell = ["jiggy", "debian-box"];
+  $code = <<<BASH
+sudo ufw status numbered
+Status: active
+
      To                     Action      From
      --                     ------      ----
 [ 1] Nginx HTTP             ALLOW IN    Anywhere
 [ 2] 22/tcp                 ALLOW IN    192.168.10.6
 [ 3] Nginx HTTP (v6)        ALLOW IN    Anywhere (v6)
 BASH;
-        echo $code ?></code>
+  require alias("@code");
+  ?>
+
   <p>I also learnt you can use <code>sudo ufw delete</code> to delete a rule by its specified number. But yea, <code>ufw</code> is a very easy and elegant way to control port access on your machine and I now have that set up.</p>
 </section>
 <?php
-require __DIR__ . "/../../../src/partials/tail.php";
+require alias("@tail");

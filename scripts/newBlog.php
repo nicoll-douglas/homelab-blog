@@ -33,13 +33,12 @@ $formattedDate = $details["date"];
 
 $template = <<<PHP
 <?php
-require __DIR__ . "/../../../src/partials/head.php";
+require __DIR__ . "/../../../src/bootstrap.php";
+require alias("@head");
 ?>
-
 <!-- content -->
-
 <?php
-require __DIR__ . "/../../../src/partials/tail.php";
+require alias("@tail");
 PHP;
 
 echo "Creating blog file..." . PHP_EOL;

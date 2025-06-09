@@ -1,0 +1,1 @@
+<code><?php if (isset($shell)): ?><span class="bold"><?php echo $shell[0] . "@" . $shell[1] ?></span>:<span class="bold"><?php echo $shell[2] ?? "~" ?></span>$ <?php endif; ?><?php echo $code ?></code>
