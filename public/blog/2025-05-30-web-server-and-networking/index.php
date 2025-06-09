@@ -24,7 +24,7 @@ require alias("@head");
   <?php
   $shell = ["jiggy", "debian-box", "/etc/network"];
   $code = <<<BASH
-$ sudo ss -tuln
+sudo ss -tuln
 Netid  State    Recv-Q  Send-Q   Local Address:Port    Peer Address:Port Process
 tcp    LISTEN   0       128            0.0.0.0:22           0.0.0.0:*
 tcp    LISTEN   0       511            0.0.0.0:80           0.0.0.0:*

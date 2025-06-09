@@ -97,6 +97,7 @@ BASH;
   <p>I also added the following block to <code>~/.ssh/config</code> to make SSH'ing easier:</p>
 
   <?php
+  unset($shell);
   $code = <<<BASH
 Host debian-box
   HostName 192.168.1.5
@@ -129,6 +130,7 @@ BASH;
   <p>I had to add the following lines so that the laptop wouldn't suspend when closing the lid:</p>
 
   <?php
+  unset($shell);
   $code = <<<BASH
 HandleLidSwitch=ignore
 HandleLidSwitchDocker=ignore

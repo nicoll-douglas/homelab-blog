@@ -48,6 +48,7 @@ BASH;
   <p>The final thing I wanted to do is add the repo for this website as well as the homelab to Gitea and make sure they sync up with GitHub (in case my laptop dies or something). I created empty repositories for each in the Gitea web interface and then set the remote for each repo to point to their Gitea repo. That was achieved with the following commands:</p>
 
   <?php
+  unset($shell);
   $code = <<<BASH
 git remote set-url origin ssh://192.168.1.5:222/nicoll-douglas/homelab.git
 git remote set-url origin ssh://192.168.1.5:222/nicoll-douglas/homelab-blog.git
