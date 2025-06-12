@@ -80,15 +80,7 @@ DC;
 
   <p>In order to access my site over my private network from my dev machine, I added the following line to my <code>/etc/hosts</code> file: <code>192.168.1.5 homelab.nicolldouglas.local</code>. I tested in the browser and it also showed up—double success.</p>
 
-  <p>As well as doing that I updated my firewall to A, explicitly allow forwarding to the Nginx container port (80) from my main machine, and B, deny host access via host port 80 which was now open. This was done with the following rules:</p>
-
-  <?php
-  $code = <<<BASH
-sudo ufw route allow from 192.168.1.6 to any port 80 proto tcp
-sudo ufw deny 80/tcp
-BASH;
-  require alias("@code");
-  ?>
+  <p>As well as doing that, I updated my firewall to allow forwarding to the Nginx container port (80) from my main machine. This was achieved with the following: <code>sudo ufw route allow from 192.168.1.6 to any port 80 proto tcp</code></p>
 
   <p>But now, I had successfully Dockerized Nginx and cleaned up the setup of my web services.</p>
 </section>
