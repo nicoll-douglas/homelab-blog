@@ -13,3 +13,7 @@ HTML, a bit of CSS, PHP, Docker.
 ## Screenshot
 
 ![Homepage Screenshot](assets/screenshot.png)
+
+## Related
+
+[Homelab Repo](https://github.com/nicoll-douglas/homelab)
