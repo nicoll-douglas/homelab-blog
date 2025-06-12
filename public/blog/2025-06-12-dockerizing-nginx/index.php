@@ -82,7 +82,9 @@ DC;
 
   <p>As well as doing that, I updated my firewall to allow forwarding to the Nginx container port (80) from my main machine. This was achieved with the following: <code>sudo ufw route allow from 192.168.1.6 to any port 80 proto tcp</code></p>
 
-  <p>But now, I had successfully Dockerized Nginx and cleaned up the setup of my web services.</p>
+  <p>But now, I had successfully Dockerized Nginx and cleaned up the setup of my web services. Below is a diagram of how the archicture looks now:</p>
+
+  <img src="./architecture.png" width="700" alt="Web services architecture">
 </section>
 <?php
 require alias("@tail");
