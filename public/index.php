@@ -27,7 +27,7 @@ require alias("@head");
 
 <h1>Nicoll's Homelab Blog</h1>
 
-<p>Welcome to my homelab blog. The place where you can accompany my homelabbing process and quest for IT mastery.</p>
+<p>Welcome to my homelab blog. The place where you can accompany my homelabbing process, self-hosting escapades, and quest for DevOps mastery.</p>
 
 <section>
   <h2>Background</h2>
