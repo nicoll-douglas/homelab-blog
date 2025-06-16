@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up DNS resolution
+        run: |
+          echo "${{ vars.SSH_HOST }} ${{ vars.REPO_HOST }}" | sudo tee -a /etc/hosts
+          git config --global http.sslVerify false
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -33,6 +38,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up DNS resolution
+        run: |
+          echo "${{ vars.SSH_HOST }} ${{ vars.REPO_HOST }}" | sudo tee -a /etc/hosts
+          git config --global http.sslVerify false
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
