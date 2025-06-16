@@ -8,7 +8,7 @@ function parseSlug($slug)
     $dateSlug = $matches[1];
     $titleSlug = $matches[2];
 
-    $title = str_replace("-", " ", $titleSlug);
+    $title = str_replace("-", " ", rawurldecode($titleSlug));
 
     $date = formatDateSlug($dateSlug);
 

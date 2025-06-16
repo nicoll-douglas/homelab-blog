@@ -5,7 +5,7 @@ require_once __DIR__ . "/formatDateSlug.php";
 function createSlug($title)
 {
   $dateSlug = date("Y-m-d");
-  $titleSlug = str_replace(" ", "-", $title);
+  $titleSlug = rawurlencode(str_replace(" ", "-", $title));
   $slug = $dateSlug . "-" . $titleSlug;
   $date = formatDateSlug($dateSlug);
 
