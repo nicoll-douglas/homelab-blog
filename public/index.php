@@ -35,7 +35,7 @@ require alias("@head");
   <p>If you don't know what a homelab is, allow me to provide you with a definition from the web:</p>
 
   <blockquote>
-    "A homelab is a personal setup of servers, networking equipment, and other IT infrastructure that allows individuals to experiment, learn, and test technologies at home. It provides a hands-on environment for improving IT skills without affecting real production systems."
+    "A homelab is a personal setup of servers, networking equipment, and other IT infrastructure that allows individuals to self-host, experiment, learn, and test technologies at home. It provides a hands-on environment for improving IT skills without affecting real production systems."
   </blockquote>
 
   <p>And that's exactly what I have going on as I detail in this blog. I started work on my own personal homelab in May 2025. The idea of starting one had been sitting in the back of my mind for a while. I wanted to learn more about DevOps, CI/CD, Linux, and networking—and homelabbing was the perfect vehicle in mind I had for that. I had an old laptop that I knew I could use as a starting point and so one day, I decided to dig up that old laptop and put it to use. My homelab infrastrucure as of now consists of that laptop as well as my regular PC/workstation.</p>
