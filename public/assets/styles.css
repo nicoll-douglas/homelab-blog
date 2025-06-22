@@ -1,26 +1,32 @@
 /* Setup */
 
 :root {
-  --G-color-accent-1-light: #ffe554;
-  --G-color-accent-1-dark: #ffa22f;
-  --G-color-neutral: #313a19;
-  --G-color-primary: #f2f2f2;
-  --G-color-highlight: #dda056;
-  --G-color-accent-1-light-lucent: rgb(255, 229, 84, 0.1);
+  --c-accent: rgb(255, 209, 84);
+  --c-accent-50: rgba(255, 209, 84, 0.5);
+  --c-accent-10: rgba(255, 209, 84, 0.1);
+
+  --c-accent-dark: rgb(255, 152, 24);
+  --c-accent-dark-50: rgba(255, 152, 24, 0.5);
+
+  --c-text: rgb(242, 242, 242);
+  --c-text-50: rgba(242, 242, 242, 0.5);
+
+  --c-bg: #152628;
+  --c-highlight: rgb(219, 124, 7);
 }
 
 * {
   font-family: Source Code Pro, monospace, system-ui, -apple-system,
     BlinkMacSystemFont, sans-serif;
-  color: var(--G-color-primary);
+  color: var(--c-text);
   box-sizing: border-box;
+  text-shadow: 2px 2px 2px var(--c-text-50);
 }
 
 /* Selectors */
 
 ::selection {
-  background-color: var(--G-color-highlight);
-  color: black;
+  background-color: var(--c-accent-50);
 }
 
 a,
@@ -29,13 +35,15 @@ code,
 code *,
 blockquote,
 #ascii-art {
-  color: var(--G-color-accent-1-light);
+  color: var(--c-accent);
+  text-shadow: 2px 2px 2px var(--c-accent-50);
 }
 
 img,
 code,
 blockquote {
-  border: 1px solid var(--G-color-accent-1-light);
+  border: 1px solid var(--c-accent);
+  box-shadow: 2px 2px 2px var(--c-accent-50);
 }
 
 code,
@@ -56,7 +64,7 @@ blockquote {
 }
 
 body {
-  background-color: var(--G-color-neutral);
+  background-color: var(--c-bg);
   overflow-y: scroll !important;
   margin: 0;
 }
@@ -66,7 +74,7 @@ code {
   text-wrap: wrap;
   white-space: pre-wrap;
   display: block;
-  background-color: var(--G-color-accent-1-light-lucent);
+  background-color: var(--c-accent-10);
 }
 
 img {
@@ -83,19 +91,14 @@ main {
 }
 
 :focus-visible {
-  outline-color: var(--G-color-highlight);
+  outline-color: var(--c-highlight);
   outline-width: 1px;
   outline-style: solid;
 }
 
-a:visited,
-a:visited * {
-  color: var(--G-color-highlight);
-}
-
 a:active,
 a:active * {
-  color: var(--G-color-accent-1-dark);
+  color: var(--c-highlight);
 }
 
 #hot-links,
